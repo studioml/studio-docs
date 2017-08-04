@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TensorFlow Studio &mdash; tfstudio  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="tfstudio  documentation" href="index.html"/>
+        <link rel="next" title="Artifact management" href="artifacts.html"/>
+        <link rel="prev" title="Welcome to TensorFlow Studio!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> tfstudio
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">intro</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-packaging">Installation Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests">Running tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#email-password-authentication">Email / password authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#google-account-authentication">Google account authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading-and-cool-features">Further reading and cool features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="artifacts.html">Artifact management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud computing for studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customenv.html">Customization of python environment for the workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ec2_setup.html">Configuring tfstudio to work with Amazon EC2 cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcloud_setup.html">Setting up google cloud compute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperparams.html">Hyperparameter search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote_worker.html">Setting up a remote worker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_database.html">Setting up a database</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tfstudio</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>TensorFlow Studio</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tensorflow-studio">
+<h1>TensorFlow Studio<a class="headerlink" href="#tensorflow-studio" title="Permalink to this headline">¶</a></h1>
+<p align="center"></p><p><a class="reference external" href="https://github.com/ilblackdragon/studio/blob/master/LICENSE"><img alt="Hex.pm" src="https://img.shields.io/hexpm/l/plug.svg" /></a> <a class="reference external" href="https://github.com/ilblackdragon/studio/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/badges/shields.svg" /></a></p>
+<p>TensorFlow studio is a model management framework written in Python to
+help simplify and expedite your model building experience. It was
+developed to minimize any overhead involved with the scheduling,
+running, monitoring or mangagement of artifacts of your machine learning
+experiments in Python without invasion of your code. Nobody wants to
+spend their time configuring different machines, setting up
+dependencies, or playing archeology to track down previous model
+artifacts.</p>
+<p>Most of the features are compatible with any Python machine learning
+framework (<a class="reference external" href="https://github.com/fchollet/keras">Keras</a>,
+<a class="reference external" href="https://github.com/tensorflow/tensorflow">TensorFlow</a>,
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn">scikit-learn</a>, etc);
+some extra features are available for Keras and TensorFlow.</p>
+<p><strong>Use TFstudio to:</strong></p>
+<ul class="simple">
+<li>Capture experiment information- Python environment, files, dependencies and logs- without modifying the experiment code.</li>
+<li>Monitor and organize experiments using a web dashboard that integrates with TensorBoard.</li>
+<li>Run experiments locally, remotely, or in the cloud (Google Cloud or Amazon EC2)</li>
+<li>Manage artifacts (persistence?)</li>
+<li>Perform hyperparameter search</li>
+<li>Create customizable Python environments for remote workers.</li>
+</ul>
+<div class="section" id="example-usage">
+<h2>Example usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<p>Start visualizer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">ui</span>
+</pre></div>
+</div>
+<p>Run your jobs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="n">myfile</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>You can see results of your job at <a class="reference external" href="http://127.0.0.1:5000">http://127.0.0.1:5000</a>. Run
+<code class="docutils literal"><span class="pre">studio</span> <span class="pre">{ui|run}</span> <span class="pre">--help</span></code> for a full list of ui / runner options</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation-packaging">
+<h3>Installation Packaging<a class="headerlink" href="#installation-packaging" title="Permalink to this headline">¶</a></h3>
+<p>Once open sourced, we’ll publish package to PyPI. For now, pip install
+it from the git project directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ilblackdragon</span><span class="o">/</span><span class="n">studio</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">studio</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>A setup.py is included in the top level of the git repository that
+allows the creation of tar archives for installation on runners and
+other systems where git is not the primary use case for handling Python
+artifacts. To create the installable, use the following command from the
+top level directory of a cloned repository:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
+</pre></div>
+</div>
+<p>This command will create a file dist/studio-x.x.tar.gz that can be used
+with pip as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">studio</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>Certain types of runners can make use of the studio software
+distribution to start projects without any intervention, devops less
+runners. To include the software distribution, add the tar.gz file to
+your workspace directory under a dist subdirectory. Runners supporting
+software distribution will unroll the software and install it using
+virtualenv.</p>
+<p>We recommend setting up a <a class="reference external" href="https://github.com/pypa/virtualenv">virtual
+environment</a>.</p>
+</div>
+<div class="section" id="running-tests">
+<h3>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h3>
+<p>To run the unit and regression tests, run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>python $(which nosetests) --processes=8 --process-timeout=600
+</pre></div>
+</div>
+<p>Note that simply <code class="docutils literal"><span class="pre">nosetests</span></code> tends not to use virtualenv correctly. If
+you have application credentials configured to work with distributed
+queues and cloud workers, those will be tested as well. Otherwise,
+respective tests will be skipped. The total test runtime, when run in
+parallel as in the command above, should be no more than 10 minutes.
+Most of the tests are I/O limited, so parallel execution speeds up
+things quite a bit. The longest test is the gpu cloud worker test in EC2
+cloud (takes about 500 seconds due to installation of the drivers / CUDA
+on the EC2 instance).</p>
+</div>
+</div>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>Both studio ui and studio runner use the same authentication tokens for
+a database backend. The tokens are valid for one hour, but if TFstudio
+is running, it renews the tokens automatically.</p>
+<p>Note that refresh tokens do not expire; this means you can use these
+tokens on multiple machines, e.g. when you want to use a Google account
+authentication on a remote server but don’t want to open extra ports.
+Simply copy the contents of ~/.tfstudio/keys folder to the desired
+machine.</p>
+<p>Currently TensorFlow studio supports 2 methods of authentication: email
+and password and using a Google account. To use studio runner and studio
+ui in guest mode, in studio/default_config.yaml, uncomment “guest:
+true” under the database section.</p>
+<p>Alternatively, you can set up your own database and configure TFstudio
+to use it. See <a class="reference external" href="docs/setup_database.md">setting up database</a>. This is
+a preferred option if you want to keep your models and artifacts
+private.</p>
+<div class="section" id="email-password-authentication">
+<h3>Email / password authentication<a class="headerlink" href="#email-password-authentication" title="Permalink to this headline">¶</a></h3>
+<p>If you have an email and password account set up, you can use this
+method. In default_config.yaml, uncomment “use_email_auth: true”
+under the database section. If the token is not found or expired when
+you run studio ui / studio runner, you will be asked fof your email and
+password for authentication. Note that the password is NOT stored on
+your computer (but tokens are), so you will be asked for your password
+after an hour of inactivity.</p>
+</div>
+<div class="section" id="google-account-authentication">
+<h3>Google account authentication<a class="headerlink" href="#google-account-authentication" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t have an email and password account set up, don’t despair!
+Any user with a Google account can use TensorFlow studio as a
+first-class citizen. If a token is not found when you run studio, the
+Web UI will redirect you to the Google account authentication app where
+you will be issued a new authentication token.</p>
+</div>
+</div>
+<div class="section" id="further-reading-and-cool-features">
+<h2>Further reading and cool features<a class="headerlink" href="#further-reading-and-cool-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="docs/remote_worker.md">Running experiments remotely</a></li>
+<li><a class="reference external" href="docs/customenv.md">Custom Python environments for remote workers</a></li>
+<li><a class="reference external" href="docs/cloud.md">Running experiments in the cloud</a></li>
+<li><a class="reference external" href="docs/gcloud_setup.md">Google Cloud setup instructions</a></li>
+<li><a class="reference external" href="docs/ec2_setup.md">Amazon EC2 setup instructions</a></li>
+<li><a class="reference external" href="docs/artifacts.md">Artifacts management</a></li>
+<li><a class="reference external" href="docs/hyperparams.md">Hyperparameter search</a></li>
+<li><a class="reference external" href="docs/model_pipelines.md">Pipelines for trained models</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="artifacts.html" class="btn btn-neutral float-right" title="Artifact management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to TensorFlow Studio!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Stephanie Oh.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

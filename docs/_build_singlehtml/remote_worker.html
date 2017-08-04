@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up a remote worker &mdash; tfstudio  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="tfstudio  documentation" href="index.html"/>
+        <link rel="next" title="Setting up a database" href="setup_database.html"/>
+        <link rel="prev" title="Hyperparameter search" href="hyperparams.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> tfstudio
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="artifacts.html">Artifact management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud computing for studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customenv.html">Customization of python environment for the workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ec2_setup.html">Configuring tfstudio to work with Amazon EC2 cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcloud_setup.html">Setting up google cloud compute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperparams.html">Hyperparameter search</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up a remote worker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#i-getting-credentials">I. Getting credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ii-enabling-google-pubsub-for-the-google-application">II Enabling Google PubSub for the Google Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iii-setting-up-remote-worker">III. Setting up remote worker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iv-setting-up-a-remote-worker-with-exising-docker-image">IV. Setting up a remote worker with exising docker image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v-submitting-work">V. Submitting work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup_database.html">Setting up a database</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tfstudio</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting up a remote worker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/remote_worker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-a-remote-worker">
+<h1>Setting up a remote worker<a class="headerlink" href="#setting-up-a-remote-worker" title="Permalink to this headline">¶</a></h1>
+<p>This page describes a procedure for setting up a remote worker for
+studio. Remote workers are listening to the queue; once a worker
+receives a message from the queue, it starts the experiments</p>
+<div class="section" id="i-getting-credentials">
+<h2>I. Getting credentials<a class="headerlink" href="#i-getting-credentials" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Remote workers work by listening to distributed queue. Right now the
+distributed queue is backed by Google PubSub; so to access it, you’ll
+need application credentials from Google. (in the future, it may be
+implemented via firebase itself, in which case this step should
+become obsolete). If you made it this far, you are likely to have a
+google cloud compute account set up; but even if not, go to
+<a class="reference external" href="http://cloud.google.com">http://cloud.google.com</a> and either set up an account or sign in.</li>
+<li>Next, create a project if you don’t have a project corresponding to
+studio just yet.</li>
+<li>Then go to API Manager -&gt; Credentials, and click “Create credentials”
+-&gt; “Service account key”</li>
+<li>Choose “New service account” from the “Select accout” dropdown, and
+keep key type as JSON</li>
+<li>Enter a name of your liking for account (google will convert it to a
+uniqie name), and choose “PubSub Editor” for a role (technically, you
+can create 2 keys, and keep publisher on a machine that submits work,
+and subscriber key on a machine that implements the work). If you are
+planning to use cloud workers, it is also recommended to add Compute
+Engine / Compute Engine Admin (v1).</li>
+<li>Save a json credentials file. It is recommended that the credential
+file be saved in a safe location such as your ~/.ssh directory and
+that you use the ‘chmod 0600 file.json’ command to help secure the
+file within your Linux user account.</li>
+<li>Add <code class="docutils literal"><span class="pre">GOOGLE_APPLICATION_CREDENTIALS</span></code> variable to the environment
+that points to the saved json credentials file both on work submitter
+and work implementer.</li>
+</ol>
+</div>
+<div class="section" id="ii-enabling-google-pubsub-for-the-google-application">
+<h2>II Enabling Google PubSub for the Google Application<a class="headerlink" href="#ii-enabling-google-pubsub-for-the-google-application" title="Permalink to this headline">¶</a></h2>
+<p>In order to use google queues for your own remote workers, as opposed to
+the Google Cloud Platform workers, PubSub API services will need to be
+enabled for the project. To do this goto the Google API Manager
+Dashboard within the Google Cloud Platform console and select the Enable
+API drop down which is located at the top of the Dashboard with a ‘+’
+icon beside it. From here you will see a panel of API services that can
+be enabled, choose the PubSub API. In the PubSub Dashboard there is an
+option to enable the API at the top of the Dashboard.</p>
+</div>
+<div class="section" id="iii-setting-up-remote-worker">
+<h2>III. Setting up remote worker<a class="headerlink" href="#iii-setting-up-remote-worker" title="Permalink to this headline">¶</a></h2>
+<p>If you don’t have your own docker container to run jobs in, follow the
+instructions below. Otherwise, jump to the next section. 1. Install
+docker, and nvidia-docker to use gpus 2. Clone the repo</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ilblackdragon</span><span class="o">/</span><span class="n">studio</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">studio</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>To check success of installation, you can run
+<code class="docutils literal"><span class="pre">python</span> <span class="pre">$(which</span> <span class="pre">nosetests)</span> <span class="pre">--processes=10</span> <span class="pre">--process-timeout=600</span></code> to
+run the tests (may take about 10 min to finish)</p>
+<ol class="arabic" start="3">
+<li><p class="first">Start worker (queue name is a name of the queue that will define
+where submit work to)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">start</span> <span class="n">remote</span> <span class="n">worker</span> <span class="o">--</span><span class="n">queue</span><span class="o">=&lt;</span><span class="n">queue</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="iv-setting-up-a-remote-worker-with-exising-docker-image">
+<h2>IV. Setting up a remote worker with exising docker image<a class="headerlink" href="#iv-setting-up-a-remote-worker-with-exising-docker-image" title="Permalink to this headline">¶</a></h2>
+<p>This section applies to the cases when you already have a docker
+image/container, and would like studio remote worker to run in it (wink
+wink Antoine :).</p>
+<ol class="arabic">
+<li><p class="first">Make sure that the image has python-dev, python-pip, git installed,
+as well as studio. The easiest way is to make your Dockerfile inherit
+from from the tfstudio Dockerfile (located in the studio root
+directory). Otherwise, copy relevant contents of tfstudio Dockerfile
+into yours.</p>
+</li>
+<li><p class="first">Bake the credentials into your image. Run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">add</span> <span class="n">credentials</span> <span class="p">[</span><span class="o">--</span><span class="n">base_image</span><span class="o">=&lt;</span><span class="n">image</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">tag</span><span class="o">=&lt;</span><span class="n">tag</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">check</span><span class="o">-</span><span class="n">gpu</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>where <code class="docutils literal"><span class="pre">&lt;image&gt;</span></code> is name of your image (default is
+peterzhokhoff/tfstudio); <code class="docutils literal"><span class="pre">&lt;tag&gt;</span></code> is the tag of the image with
+credentials (default is <code class="docutils literal"><span class="pre">&lt;image&gt;_creds</span></code>). Add option check-gpu if you
+are planning to use image on the same machine you are running the script
+from. This will check for presence of CUDA toolbox and uninstall
+tensorflow-gpu if not found.</p>
+<ol class="arabic" start="3">
+<li><p class="first">Start remote worker passing <code class="docutils literal"><span class="pre">--image=&lt;tag&gt;</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">start</span> <span class="n">remote</span> <span class="n">worker</span> <span class="o">--</span><span class="n">image</span><span class="o">=&lt;</span><span class="n">tag</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">queue</span><span class="o">=&lt;</span><span class="n">queue</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You can also start the container and remote worker within it manually,
+by running:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">remote</span> <span class="n">worker</span> <span class="o">--</span><span class="n">queue</span><span class="o">=&lt;</span><span class="n">queue</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>within the container - that is essentially what
+<code class="docutils literal"><span class="pre">studio-start-remote-worker</span></code> script does, plus mounting cache
+directories <code class="docutils literal"><span class="pre">~/.tfstudio/experiments</span></code> and <code class="docutils literal"><span class="pre">~/.tfstudio/blobcache</span></code></p>
+</div>
+<div class="section" id="v-submitting-work">
+<h2>V. Submitting work<a class="headerlink" href="#v-submitting-work" title="Permalink to this headline">¶</a></h2>
+<p>On a submitting machine (usually local):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">queue</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">any_other_args</span><span class="o">&gt;</span> <span class="n">script</span><span class="o">.</span><span class="n">py</span> <span class="o">&lt;</span><span class="n">script_args</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This script should quit promptly, but you’ll be able to see experiment
+progress in studio web ui</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup_database.html" class="btn btn-neutral float-right" title="Setting up a database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hyperparams.html" class="btn btn-neutral" title="Hyperparameter search" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Stephanie Oh.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
