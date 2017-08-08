@@ -27,7 +27,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #fff;
+  color: #E9692D;
 }
 h1,
 h2,
@@ -98,7 +98,7 @@ aside {
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #EE931D !important;
+  color: #E9692D !important;
   background-color: transparent;
 }
 .navbar-default .nav > li.active > a:hover,
@@ -139,11 +139,11 @@ aside {
   }
   .navbar-default.affix .nav > li > a,
   .navbar-default.affix .nav > li > a:focus {
-    color: #222222;
+    color: #EE931D;
   }
   .navbar-default.affix .nav > li > a:hover,
   .navbar-default.affix .nav > li > a:focus:hover {
-    color: #EE931D;
+    color: #E9692D;
   }
 }
 header {
