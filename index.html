@@ -53,6 +53,9 @@
                         <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
+                        <a class="page-scroll" href="#start">Get Started</a>
+                    </li>
+                    <li>
                         <a class="page-scroll" href="#contact">Contribute</a>
                     </li>
                 </ul>
@@ -83,11 +86,15 @@
                     <p class="text-muted text-left">TFStudio is a model management framework written in Python to help simplify and expedite your model building experience. It was developed to minimize any overhead involved with the scheduling, running, monitoring or mangagement of artifacts of your machine learning experiments in Python without invasion of your code. Nobody wants to spend their time configuring different machines, setting up dependencies, or playing archeology to track down previous model artifacts.
 </br></br>
 Most of the features are compatible with any Python machine learning framework (Keras, TensorFlow, scikit-learn, etc); some extra features are available for Keras and TensorFlow.</p>
-                    <a href="https://github.com/ilblackdragon/studio" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                    <a href="#start" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
 <!--
     <section class='bg-primary' id="services">
         <div class="container">
@@ -231,14 +238,24 @@ Most of the features are compatible with any Python machine learning framework (
         </div>
     </section>
 -->
-    <aside class="bg-primary">
-        <div class="container text-center">
-            <h1>Learn More</h1>
-            <div class="call-to-action">
-                <a href="http://github.com/ilblackdragon/studio" class="btn btn-default btn-xl sr-button">View on Github</a>
+    <section class="bg-primary" id="start">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Get Started!</h2>
+                    <hr class="primary">
+                    <p class="text-left">Start visualizer:</p>
+                    <pre class="text-left"><code>studio ui</code></pre>
+                    <p class="text-left">Run your jobs:</p>
+                    <pre class="text-left"><code>studio run myfile.py</code></pre>
+                    <p class="text-left">You can see results of your job at http://127.0.0.1:5000. Run studio {ui|run} --help for a full list of ui / runner options</p>
+                    <div class="call-to-action">
+                        <a href="http://github.com/ilblackdragon/studio" class="btn btn-default btn-xl sr-button">View on Github</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </aside>
+    </section>
 
     <section id="contact">
         <div class="container">
