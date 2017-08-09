@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Artifact management &mdash; tfstudio  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="tfstudio  documentation" href="index.html"/>
+        <link rel="next" title="Cloud computing for studio" href="cloud.html"/>
+        <link rel="prev" title="TensorFlow Studio" href="README.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> tfstudio
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">intro</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Artifact management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#capture-data">Capture data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save-the-result-of-the-experiment">Save the result of the experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machine-independent-access-to-the-artifacts">Machine-independent access to the artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#re-using-artifacts-from-other-experiments">Re-using artifacts from other experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#default-artifacts">Default artifacts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud.html">Cloud computing for studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="customenv.html">Customization of python environment for the workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ec2_setup.html">Configuring tfstudio to work with Amazon EC2 cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcloud_setup.html">Setting up google cloud compute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hyperparams.html">Hyperparameter search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote_worker.html">Setting up a remote worker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_database.html">Setting up a database</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tfstudio</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Artifact management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/artifacts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="artifact-management">
+<h1>Artifact management<a class="headerlink" href="#artifact-management" title="Permalink to this headline">¶</a></h1>
+<p>This page describes facilities that TensorFlow Studio provides for
+management of experiment artifacts. For now, artifact storage is backed
+by google cloud storage.</p>
+<div class="section" id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>The idea behind artifact management is three-fold: 1. With no coding
+overhead capture the data that experiment depends on (e.g. dataset) 2.
+With no coding overhead save and with minimal overhead visualize the
+results of the experiment (neural network weights, etc). 3. With minimal
+coding overhead make experiments reproducible on any machine (without
+manual data download, path correction etc).</p>
+<p>Below we provide the examples of each use case.</p>
+<div class="section" id="capture-data">
+<h3>Capture data<a class="headerlink" href="#capture-data" title="Permalink to this headline">¶</a></h3>
+<p>Let’s imagine that file <code class="docutils literal"><span class="pre">train_nn.py</span></code> in current directory trains
+neural network based on data located in <code class="docutils literal"><span class="pre">~/data/</span></code>. In order to capture
+the data, we need to invoke <code class="docutils literal"><span class="pre">studio</span> <span class="pre">run</span></code> as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">capture</span><span class="o">-</span><span class="n">once</span><span class="o">=~/</span><span class="n">data</span><span class="p">:</span><span class="n">data</span> <span class="n">train_nn</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Flag <code class="docutils literal"><span class="pre">--capture-once</span></code> (or <code class="docutils literal"><span class="pre">-co</span></code>) specifies that data at path ~/data
+needs to be captured once at the experiment startup. Additionally, tag
+<code class="docutils literal"><span class="pre">data</span></code> (provided as a value after <code class="docutils literal"><span class="pre">:</span></code>) allows script to access data
+in a machine-independent way; and also distinguishes the dataset in the
+web-ui (Web UI page of the experiment will contain download link for
+tar-gzipped folder <code class="docutils literal"><span class="pre">~/data</span></code>)</p>
+</div>
+<div class="section" id="save-the-result-of-the-experiment">
+<h3>Save the result of the experiment<a class="headerlink" href="#save-the-result-of-the-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Let’s now consider an example of a python script that periodically saves
+some intermediate data (e.g. weigths of a neural network). The following
+example can be made more consise using keras or tensorflow built-in
+checkpointers, but we’ll leave that as an exercise for the reader.
+Consider the following contents of file <code class="docutils literal"><span class="pre">train_linreg.py</span></code> (also
+located in studio/helloworld/ in repo):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">no_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">dim_samples</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">no_steps</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">no_samples</span><span class="p">,</span> <span class="n">dim_samples</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">no_samples</span><span class="p">,))</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">dim_samples</span><span class="p">,))</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">no_steps</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="n">err</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dw</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">err</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step = </span><span class="si">{}</span><span class="s2">, loss = </span><span class="si">{}</span><span class="s2">, L2 norm = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)))</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/weights/lr_w_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.pck&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">loss</span><span class="p">)),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The reader can immediately see that we are solving a linear regression
+problem by gradient descent method and saving weights at each step to
+~/weights folder.</p>
+<p>In order to simply save the weigths, we can run the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">capture</span><span class="o">=~/</span><span class="n">weights</span><span class="p">:</span><span class="n">weights</span> <span class="n">train_linreg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Flag <code class="docutils literal"><span class="pre">--capture</span></code> (or <code class="docutils literal"><span class="pre">-c</span></code>) specifies that data from folder
+<code class="docutils literal"><span class="pre">~/weights</span></code> needs to be captured continously - every minute (frequency
+can be changed in a config file), and at the end of the experiment. In
+the Web ui page of the experiment we now have a link to weights
+artifact. This simple script should finish almost immediately, but for
+longer running jobs upload happens every minute of a runtime (the upload
+happens in a separate thread, so this should not slow down the actual
+experiment)</p>
+</div>
+<div class="section" id="machine-independent-access-to-the-artifacts">
+<h3>Machine-independent access to the artifacts<a class="headerlink" href="#machine-independent-access-to-the-artifacts" title="Permalink to this headline">¶</a></h3>
+<p>So far we have been assuming that all the experiments are being run a
+local machine; and the only interaction with artifacts has been to save
+them for posterity’s sake. But what if our experiments are growing a bit
+to big to be run locally? Fortunately, studio comes with a dockerized
+worker that can run your jobs on a beefy gpu server, or on a cloud
+instance (cloud management is not provided just yet). But how do we make
+local data available on such worker? Clearly, a local path along the
+lines of <code class="docutils literal"><span class="pre">/Users/john.doe/weights/</span></code> will not always be reproducible on
+a remote worker. Studio provides a way to access files in a
+machine-independent way, as follows. Let us replace last three lines in
+the script above by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">studio</span> <span class="k">import</span> <span class="n">fs_tracker</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fs_tracker</span><span class="o">.</span><span class="n">get_artifact</span><span class="p">(</span><span class="s1">&#39;weights&#39;</span><span class="p">),</span>
+                      <span class="s1">&#39;lr_w_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.pck&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">loss</span><span class="p">)),</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We can now run the script either locally, the exact same way as before:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">capture</span><span class="o">=~/</span><span class="n">weights</span><span class="p">:</span><span class="n">weights</span> <span class="n">train_linreg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Or, if the have a worker listening to the queue <code class="docutils literal"><span class="pre">work_queue</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">capture</span><span class="o">=~/</span><span class="n">weights</span><span class="p">:</span><span class="n">weights</span> <span class="o">--</span><span class="n">queue</span> <span class="n">work_queue</span> <span class="n">train_linreg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>In the former case, the call <code class="docutils literal"><span class="pre">fs_tracker.get_artifact('weights')</span></code> will
+simply return <code class="docutils literal"><span class="pre">os.path.expanduser('~/weights')</span></code>. In the latter case,
+remote worker will set up a cache directory that corresponds to artifact
+with tag weights, copies existing data from storage into it (so that
+data can be read from that directory as well), and the call
+<code class="docutils literal"><span class="pre">fs_tracker.get_artifact('weights')</span></code> will return path to that
+directory. In both cases, –experiment flag is not mandatory, if you
+don’t speco</p>
+</div>
+<div class="section" id="re-using-artifacts-from-other-experiments">
+<h3>Re-using artifacts from other experiments<a class="headerlink" href="#re-using-artifacts-from-other-experiments" title="Permalink to this headline">¶</a></h3>
+<p>A neat side-benefit of using machine-indepdent access to the artifacts
+is ability to plug different datasets into experiment without touching
+the script at all - simply provide different paths for the same tag in
+–capture(-once) flags. More importantly though, one can reuse datasets
+(or any artifacts) from another experiment using –reuse flag. First,
+let’s imagine we run the <code class="docutils literal"><span class="pre">train_linreg.py</span></code> script, this time giving
+experiment a name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">capture</span><span class="o">=~/</span><span class="n">weights</span><span class="p">:</span><span class="n">weights</span> <span class="o">--</span><span class="n">experiment</span> <span class="n">linear_regression</span> <span class="n">train_linreg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Say, now we want to print the L2 norm of the last set of weights. Let’s
+consider the following script (<code class="docutils literal"><span class="pre">print_norm_linreg.py</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">studio</span> <span class="k">import</span> <span class="n">fs_tracker</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+
+<span class="n">weights_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fs_tracker</span><span class="o">.</span><span class="n">get_artifact</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">),</span><span class="s1">&#39;*.pck&#39;</span><span class="p">))</span>
+<span class="n">weights_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weights_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">weights_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="n">w</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can run it via</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">studio</span> <span class="n">run</span> <span class="o">--</span><span class="n">reuse</span><span class="o">=</span><span class="n">linear_regression</span><span class="o">/</span><span class="n">weights</span><span class="p">:</span><span class="n">w</span> <span class="n">print_norm_linreg</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Flag reuse tells studio run that artifact <code class="docutils literal"><span class="pre">weights</span></code> from experiment
+<code class="docutils literal"><span class="pre">linear_regression</span></code> will be used in the current experiment with a tag
+<code class="docutils literal"><span class="pre">w</span></code>. There is a bit of a catch - for download optimization, all
+artifacts from other experiments are considered immutable, and cached as
+such. If you re-run the experiment with the same name and would like to
+use new artifacts from it, clean the cache folder
+<code class="docutils literal"><span class="pre">~/.tfstudio/blobcache/</span></code>.</p>
+</div>
+</div>
+<div class="section" id="default-artifacts">
+<h2>Default artifacts<a class="headerlink" href="#default-artifacts" title="Permalink to this headline">¶</a></h2>
+<p>Each experiment gets default artifacts that it can use via
+<code class="docutils literal"><span class="pre">fs_tracker.get_artifact()</span></code> even without –reuse or –capture(-once)
+flags. Those are:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">workspace</span></code> - this artifact always gets cached to/from <code class="docutils literal"><span class="pre">.</span></code>
+folder, thus creating a copy of working directory on a remote
+machine; and saving state of the scripts</li>
+<li><code class="docutils literal"><span class="pre">output</span></code> - this artifact is a file with stdout and stderr of the
+script run</li>
+<li><code class="docutils literal"><span class="pre">modeldir</span></code> - it is recommended to save weights in this directory,
+because studio will try to do some analysis on it, such as number of
+checkpoints etc.</li>
+<li><code class="docutils literal"><span class="pre">tb</span></code> - it is recommended to save tensorboard logs into this
+directory, this way studio will be able to automatically feed them
+into tensorboard</li>
+</ol>
+<p>All of the default artifacts are considered mutable (i.e. are stored
+continously). The default artifacts can be overwritten by
+–capture(-once) flags.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cloud.html" class="btn btn-neutral float-right" title="Cloud computing for studio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="README.html" class="btn btn-neutral" title="TensorFlow Studio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Stephanie Oh.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
