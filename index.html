@@ -254,13 +254,30 @@ Most of the features are compatible with any Python machine learning framework (
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Get Started</h2>
                     <hr class="primary">
-                    <p class="text-left">Start visualizer:</p>
-                    <pre class="text-left"><code class="python">studio ui</code></pre>
-                    <p class="text-left">Run your jobs:</p>
-                    <pre class="text-left"><code class="python">studio run myfile.py</code></pre>
-                    <p class="text-left">You can see results of your job at http://127.0.0.1:5000. Run studio {ui|run} --help for a full list of ui / runner options</p>
-                    <div class="call-to-action">
-                        <a href="http://github.com/ilblackdragon/studio/studio/tree/master/docs" class="btn btn-default btn-xl sr-button">Read our tutorial</a>
+                    <p class="text-left">Start out by installing TFstudio. We recommend using a <a href="https://github.com/pypa/virtualenv"><font color=#eb3812>virtual environment.</font></a> Once you've set up your virtual environment, update your pip:</p> 
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">pip install --upgrade pip</div>
+                    </div>
+                    <p class="text-left">Download and install TFstudio from the source:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">git clone https://github.com/ilblackdragon/studio && cd studio && pip install -e .</div>
+                    </div>
+                    <p class="text-left">For authentication, you must set up an email/password authentication or a Google account. See the <a href="http://github.com/ilblackdragon/studio/studio/tree/master/docs"><font color=#eb3812>docs</font></a> for more details. For now, get started as a guest by uncommenting "guest:true" in studio/default_config.yaml. In the helloworld folder, you can find basic examples of experiments you can run. At this point, you can test it out with a machine learning experiment yourself. Let's try out the helloworld.py:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run helloworld.py</div>
+                    </div>
+                    <p class="text-left">Now you can visualize your experiment by navigating to the web interface. Open the web visualizer:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio ui</div>
+                    </div>
+                    <p class="text-left">You can see the results of your job at http://127.0.0.1:5000. Here you can examine or delete any current or past experiments. Run studio {ui|run} --help for a full list of ui / runner options</p>
+                    <p class="text-left">Click on your experiment to view experiment artifacts such as the output and workspace, experiment information such as the status and creation time, and the tail of the experiment log. </br></br> Go checkout more examples and the <a href="http://github.com/ilblackdragon/studio/studio/tree/master/docs"><font color="eb3812">tutorial.</font></a></p>
+                    <div class="page-scroll btn btn-default sr-button">
+                        <a href="#examples" class="btn btn-default btn-xl sr-button">More examples</a>
                     </div>
                 </div>
             </div>
@@ -274,15 +291,31 @@ Most of the features are compatible with any Python machine learning framework (
                     <h2 class="section-heading">Examples</h2>
                     <hr class="primary">
                     <p class="text-left">Example 1 description:</p>
-                    <pre class="text-left"><code class="python">studio run example1.py</code></pre>
-                    <p class="text-left">Example 2 description::</p>
-                    <pre class="text-left"><code class="python">studio run example2.py</code></pre>
-                    <p class="text-left">Example 3 description::</p>
-                    <pre class="text-left"><code class="python">studio run example3.py</code></pre>
-                    <p class="text-left">Example 4 description::</p>
-                    <pre class="text-left"><code class="python">studio run example4.py</code></pre>
-                    <p class="text-left">Example 5 description::</p>
-                    <pre class="text-left"><code class="python">studio run example5.py</code></pre>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example1.py</div>
+                    </div>
+                    <p class="text-left">Example 2 description:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example2.py</div>
+                    </div><p class="text-left">Example 3 description:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example3.py</div>
+                    </div><p class="text-left">Example 4 description:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example4.py</div>
+                    </div><p class="text-left">Example 5 description:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example5.py</div>
+                    </div><p class="text-left">Example 1 description:</p>
+                    <div class="command">
+                        <div class="label">Run this command:</div>
+                        <div class="text text-left">studio run example1.py</div>
+                    </div>
                     <div class="call-to-action">
                         <a href="http://github.com/ilblackdragon/studio" class="btn btn-default btn-xl sr-button">View on Github</a>
                     </div>

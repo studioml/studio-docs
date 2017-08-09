@@ -12,7 +12,7 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
-  border-color: #EE931D;
+  border-color: #E9692D;
   border-width: 3px;
   max-width: 50px;
 }
@@ -41,6 +41,36 @@ p {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 20px;
+}
+pre {
+  width: 95% !important; 
+}
+.command {
+    background-color: #F5BB2F;
+    overflow: hidden;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    border-radius: 7px;
+    margin-bottom: 20px
+}
+.command .label {
+    font-weight: 800;
+    font-size: 14px;
+    float: left;
+    width: 180px;
+    padding: 18px 10px 12px;
+    text-align: center;
+    color: #000;
+}
+.command .text {
+    background-color: #f7f7f7;
+    font-weight: 200;
+    font-size: 15px;
+    float: left !important;
+    width: calc(100% - 180px);
+    padding: 15px 25px;
+    color: #000;
 }
 .bg-primary {
   background-color: #EE931D;
