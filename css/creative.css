@@ -12,7 +12,7 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
-  border-color: #E9692D;
+  border-color: #0E3860;
   border-width: 3px;
   max-width: 50px;
 }
@@ -23,7 +23,7 @@ a {
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
-  color: #EE931D;
+  color: #34B0C2;
 }
 a:hover,
 a:focus {
@@ -46,7 +46,7 @@ pre {
   width: 95% !important; 
 }
 .command {
-    background-color: #F5BB2F;
+    background-color: #2A70B8;
     overflow: hidden;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -61,7 +61,7 @@ pre {
     width: 180px;
     padding: 18px 10px 12px;
     text-align: center;
-    color: #000;
+    color: #fff;
 }
 .command .text {
     background-color: #f7f7f7;
@@ -73,7 +73,7 @@ pre {
     color: #000;
 }
 .bg-primary {
-  background-color: #EE931D;
+  background-color: #278BC8;
 }
 .bg-dark {
   background-color: #222222;
@@ -100,14 +100,14 @@ aside {
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
-  color: #EE931D;
+  color: #278BC8;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
 .navbar-default .navbar-header .navbar-brand:focus {
-  color: #EE931D;
+  color: #278BC8;
 }
 .navbar-default .navbar-header .navbar-toggle {
   font-weight: 700;
@@ -128,7 +128,7 @@ aside {
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
-  color: #E9692D !important;
+  color: #278BC8 !important;
   background-color: transparent;
 }
 .navbar-default .nav > li.active > a:hover,
@@ -160,20 +160,20 @@ aside {
     border-color: transparent;
   }
   .navbar-default.affix .navbar-header .navbar-brand {
-    color: #EE931D;
+    color: #34B0C2;
     font-size: 20px;
   }
   .navbar-default.affix .navbar-header .navbar-brand:hover,
   .navbar-default.affix .navbar-header .navbar-brand:focus {
-    color: #EE931D;
+    color: #34B0C2;
   }
   .navbar-default.affix .nav > li > a,
   .navbar-default.affix .nav > li > a:focus {
-    color: #EE931D;
+    color: #34B0C2;
   }
   .navbar-default.affix .nav > li > a:hover,
   .navbar-default.affix .nav > li > a:focus:hover {
-    color: #E9692D;
+    color: #0050A2;
   }
 }
 header {
@@ -185,7 +185,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: linear-gradient(120deg, #F5BB2F, #E9692D);
+  background-image: linear-gradient(120deg, #0050A2, #38C1DB);
   text-align: center;
   color: white;
 }
@@ -366,8 +366,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: white;
-  background-color: #eb3812;
-  border-color: #eb3812;
+  background-color: #2A70B8;
+  border-color: #0050A2;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
