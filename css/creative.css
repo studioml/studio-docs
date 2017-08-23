@@ -55,7 +55,7 @@ pre {
     margin-bottom: 20px
 }
 .command .label {
-    font-weight: 800;
+    font-weight: 400;
     font-size: 14px;
     float: left;
     width: 180px;
@@ -102,7 +102,7 @@ aside {
 .navbar-default .navbar-header .navbar-brand {
   color: #278BC8;
   font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
@@ -196,7 +196,7 @@ header .header-content {
   width: 100%;
 }
 header .header-content .header-content-inner h1 {
-  font-weight: 700;
+  font-weight: 400;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 30px;
@@ -416,7 +416,7 @@ fieldset[disabled] .btn-primary.active {
   font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
   border: none;
   border-radius: 300px;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
 }
 .btn-xl {
