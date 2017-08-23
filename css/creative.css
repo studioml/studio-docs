@@ -9,7 +9,7 @@ body {
   width: 100%;
 }
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
 }
 hr {
   border-color: #0E3860;
@@ -35,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
 }
 p {
   font-size: 16px;
@@ -94,15 +94,15 @@ aside {
 .navbar-default {
   background-color: white;
   border-color: rgba(34, 34, 34, 0.05);
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
 }
 .navbar-default .navbar-header .navbar-brand {
   color: #278BC8;
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 700;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
 }
 .navbar-default .navbar-header .navbar-brand:hover,
@@ -110,7 +110,7 @@ aside {
   color: #278BC8;
 }
 .navbar-default .navbar-header .navbar-toggle {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 20px;
   color: #222222;
   text-transform: uppercase;
@@ -118,8 +118,8 @@ aside {
 .navbar-default .nav > li > a,
 .navbar-default .nav > li > a:focus {
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 21px;
+  font-weight: 400;
+  font-size: 15px;
   color: #222222;
 }
 .navbar-default .nav > li > a:hover,
@@ -281,7 +281,7 @@ header .header-content .header-content-inner p {
 }
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category,
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
   padding: 0 15px;
 }
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
@@ -413,7 +413,7 @@ fieldset[disabled] .btn-primary.active {
   background-color: white;
 }
 .btn {
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica', Arial, sans-serif;
   border: none;
   border-radius: 300px;
   font-weight: 700;
