@@ -91,6 +91,7 @@
                     <p class="text-muted text-left">Studio is a model management framework written in Python to help simplify and expedite your model building experience. It was developed to minimize any overhead involved with the scheduling, running, monitoring or management of artifacts of your machine learning experiments in Python without invasion of your code. No one wants to spend their time configuring different machines, setting up dependencies, or playing archeology to track down previous model artifacts.
 </br></br>
 Most of the features are compatible with any Python machine learning framework (Keras, TensorFlow, scikit-learn, etc); some extra features are available for Keras and TensorFlow.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/MnYLGpcGns8" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -248,22 +249,12 @@ Most of the features are compatible with any Python machine learning framework (
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Get Started</h2>
                     <hr class="primary">
-                    <p class="text-left">Start out by installing Studio. We recommend using a <a href="https://github.com/pypa/virtualenv"><font color=#0050A2>virtual environment.</font></a> Once you've set up your virtual environment, update your pip:</p> 
-                    <div class="command">
-                        <div class="label">Run this command:</div>
-                        <div class="text text-left">pip install --upgrade pip</div>
-                    </div>
                     <p class="text-left">Pip install Studio from master PyPi repository:</p>
                     <div class="command">
                         <div class="label">Run this command:</div>
                         <div class="text text-left">pip install studioml</div>
                     </div>
-                    <p class="text-left">Download and install StudioML from the source:</p>
-                    <div class="command">
-                        <div class="label">Run this command:</div>
-                        <div class="text text-left">git clone https://github.com/studioml/studio && cd studio && pip install -e .</div>
-                    </div>
-                    <p class="text-left">For authentication, you must set up an email/password authentication or a Google account. See the <a href="docs/README.html#authentication"><font color=#0050A2>docs</font></a> for more details. For now, get started as a guest by uncommenting "guest:true" in studio/default_config.yaml. In the helloworld folder, you can find basic examples of experiments you can run. At this point, you can test it out with a machine learning experiment yourself. Let's try out the helloworld.py:</p>
+                    <p class="text-left">For authentication, you must set up an email/password authentication or a Google account. See the <a href="http://studioml.readthedocs.io/en/docs-rtd/README.html#authentication"><font color=#0050A2>docs</font></a> for more details. For now, get started as a guest by uncommenting "guest:true" in studio/default_config.yaml. In the helloworld folder, you can find basic examples of experiments you can run. At this point, you can test it out with a machine learning experiment yourself. Let's try out the helloworld.py:</p>
                     <div class="command">
                         <div class="label">Run this command:</div>
                         <div class="text text-left">studio run helloworld.py</div>
@@ -274,10 +265,11 @@ Most of the features are compatible with any Python machine learning framework (
                         <div class="text text-left">studio ui</div>
                     </div>
                     <p class="text-left">You can see the results of your job at http://127.0.0.1:5000. Here you can examine or delete any current or past experiments. Run studio {ui|run} --help for a full list of ui / runner options</p>
-                    <p class="text-left">Click on your experiment to view experiment artifacts such as the output and workspace, experiment information such as the status and creation time, and the tail of the experiment log. </br></br> Go checkout more examples and the <a href="docs/README.html"><font color="0050A2">tutorial.</font></a></p>
-                    <div class="page-scroll btn btn-default sr-button">
-                        <a href="#examples" class="btn btn-default btn-xl sr-button">More examples</a>
+                    <p class="text-left">Click on your experiment to view experiment artifacts such as the output and workspace, experiment information such as the status and creation time, and the tail of the experiment log.</p>
+                    <div class="call-to-action">
+                        <a href="http://studioml.readthedocs.io/en/docs-rtd/index.html" class="btn btn-default btn-xl sr-button">Read our tutorial</a>
                     </div>
+                
                 </div>
             </div>
         </div>
@@ -289,13 +281,9 @@ Most of the features are compatible with any Python machine learning framework (
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">What's new?</h2>
                     <hr class="primary">
-                    <p class="text-left">Update 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae porttitor ipsum. Nunc ultrices pulvinar</p>
-                    <p class="text-left">Update 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae porttitor ipsum.</p>
-                    <p class="text-left">Update 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae porttitor ipsum. Nunc ultrices pu</p>
-                    <p class="text-left">Update 4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae porttitor ipsum. Nunc ult</p>
-                    <div class="call-to-action">
-                        <a href="docs/README.html" class="btn btn-default btn-xl sr-button">Read our tutorial</a>
-                    </div>
+                    <p class="text-left">2017-08-23: <a href="http://studioml.readthedocs.io/en/docs-rtd/index.html">Automatic documentation building with readthedocs.org</a></p>
+                    <p class="text-left">2017-08-17: <a href="https://studio-ed756.appspot.com">New hosted UI site</a></p>
+                    <p class="text-left">2017-08-12: <a href="http://github.com/studioml/studio">Welcome to the open source!</a></p>
                 </div>
             </div>
         </div>
