@@ -29,6 +29,9 @@ a:hover,
 a:focus {
   color: #E9692D;
 }
+.h1, h1 {
+  font-size: 48px;
+}
 h1,
 h2,
 h3,
@@ -235,6 +238,58 @@ header .header-content .header-content-inner p {
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+.landing {
+  padding-top: 80px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  min-height: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  background-position: center;  
+  color: #fff;
+  background-image: linear-gradient(120deg, #0050A2, #38C1DB);
+}
+.landing h1,
+.landing .h1 {
+  margin-top: 0;
+  font-weight: 400;
+  font-size: 30px;
+}
+.landing p {
+  margin-bottom: 30px;
+  font-weight: 300;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.landing > hr {
+  border-top-color: #d5d5d5;
+}
+.container .landing,
+.container-fluid .landing {
+  border-radius: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.landing .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .landing {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .container .landing,
+  .container-fluid .landing {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .landing h1,
+  .landing .h1 {
+    font-size: 63px;
   }
 }
 .section-heading {
