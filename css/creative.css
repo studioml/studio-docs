@@ -127,7 +127,7 @@ aside {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus:hover {
-  color: #EE931D;
+  color: #278BC8;
 }
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
@@ -365,7 +365,7 @@ header .header-content .header-content-inner p {
   margin: 0 auto 20px;
 }
 .text-primary {
-  color: #EE931D;
+  color: #278BC8;
 }
 .no-gutter > [class*='col-'] {
   padding-right: 0;
@@ -460,11 +460,11 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #EE931D;
-  border-color: #EE931D;
+  background-color: #278BC8;
+  border-color: #278BC8;
 }
 .btn-primary .badge {
-  color: #EE931D;
+  color: #278BC8;
   background-color: white;
 }
 .btn {
