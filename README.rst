@@ -12,7 +12,7 @@ to minimize any overhead involved with the scheduling, running,
 monitoring or management of artifacts of your machine learning
 experiments in Python without invasion of your code. No one wants to
 spend their time configuring different machines, setting up
-dependencies, or playing archeology to track down previous model
+dependencies, or playing archeologist to track down previous model
 artifacts.
 
 Most of the features are compatible with any Python machine learning
